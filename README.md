@@ -1,156 +1,196 @@
-# 🗳️ College Election Portal
-
 <div align="center">
 
-**A secure, full-stack online voting system for College Club President Elections**
+<br/>
 
-[![Node.js](https://img.shields.io/badge/Node.js-24.x-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org/)
-[![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black)](https://reactjs.org/)
-[![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-4169E1?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+<img src="https://raw.githubusercontent.com/anandmahadev/CLUB-ELECTION/main/client/public/vite.svg" width="60" alt="logo" />
+
+<h1>🗳️ College Election Portal</h1>
+
+<p><strong>A secure, anonymous, mobile-first voting system for College Club Elections</strong></p>
+
+<p>
+  <img src="https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
+  <img src="https://img.shields.io/badge/Vite-5-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" />
+  <img src="https://img.shields.io/badge/Node.js-24-339933?style=for-the-badge&logo=node.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/Express-4-000000?style=for-the-badge&logo=express&logoColor=white" />
+  <img src="https://img.shields.io/badge/PostgreSQL-14+-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" />
+</p>
+
+<p>
+  <a href="https://github.com/anandmahadev/CLUB-ELECTION/stargazers"><img src="https://img.shields.io/github/stars/anandmahadev/CLUB-ELECTION?style=flat-square&color=yellow" /></a>
+  <a href="https://github.com/anandmahadev/CLUB-ELECTION/issues"><img src="https://img.shields.io/github/issues/anandmahadev/CLUB-ELECTION?style=flat-square" /></a>
+  <img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" />
+  <img src="https://img.shields.io/badge/build-passing-brightgreen?style=flat-square" />
+</p>
+
+<br/>
+
+<a href="#-getting-started">Get Started</a> &nbsp;·&nbsp;
+<a href="#-api-reference">API Docs</a> &nbsp;·&nbsp;
+<a href="#-deployment">Deploy</a>
+
+<br/><br/>
+
+---
 
 </div>
 
----
+## 💡 What Is This?
 
-## ✨ Features
+The **College Election Portal** is a production-ready, full-stack web application that lets colleges run **secure, digital, anonymous elections** — built specifically for electing a **Club President**.
 
-- 🔐 **Secure Authentication** — Students log in with Roll Number + Password (bcrypt hashed)
-- 🗳️ **One Vote Per Student** — Enforced at both application and database level
-- 🔒 **Anonymous Voting** — Admin only sees aggregated vote counts, never who voted for whom
-- 👨‍💼 **Admin Control Panel** — Start/stop elections, manage candidates, upload students via CSV
-- 📊 **Live Results** — Real-time vote counts with percentage bars and CSV export
-- 🛡️ **Production-ready Security** — JWT auth, rate limiting, input validation, SQL injection prevention
-- 📱 **Mobile-first Design** — Fully responsive, optimized for phone users
+> No paper ballots. No manual counting. No duplicate votes. No exposed identities.
+
+Students log in with their Roll Number, cast one vote, and they're done. Admins get a full control panel to manage candidates, upload students in bulk, run the election, and export results.
+
+<br/>
 
 ---
 
-## 🖼️ Application Pages
+## ✨ Key Features
 
-| Student Side | Admin Side |
-|---|---|
-| Landing Page | Admin Login |
-| Login Page | Dashboard (stats + election control) |
-| Voting Page (candidates list) | Candidates Management |
-| Vote Confirmation Modal | Students Upload (CSV) |
-| Success Page | Live Results + CSV Export |
-| Already Voted Page | |
+<table>
+<tr>
+<td width="50%">
+
+### 🎓 Student Side
+- ✅ Login with Roll Number + Password
+- ✅ View all candidates with photos & manifesto
+- ✅ One click vote with confirmation modal
+- ✅ Permanent vote lock after submission
+- ✅ "Already Voted" gate on re-login
+- ✅ Session expires after 1 hour (JWT)
+
+</td>
+<td width="50%">
+
+### 👨‍💼 Admin Side
+- ✅ Separate admin login portal
+- ✅ Dashboard with live vote stats
+- ✅ Add / remove candidates
+- ✅ Bulk upload students via CSV
+- ✅ Start & stop election with one click
+- ✅ Export results as CSV
+
+</td>
+</tr>
+</table>
+
+<br/>
 
 ---
 
-## 🛠️ Tech Stack
+## 🔒 Security at Every Layer
 
-| Layer | Technology |
-|---|---|
-| **Frontend** | React 18, Vite 5, Tailwind CSS 3, Axios, React Router v6 |
-| **Backend** | Node.js, Express.js |
-| **Database** | PostgreSQL 14+ |
-| **Auth** | JSON Web Tokens (JWT), bcrypt |
-| **Security** | express-rate-limit, express-validator, parameterized queries |
+| Layer | Protection |
+|:---:|---|
+| 🔑 **Passwords** | Hashed with `bcrypt` (10 rounds) — plain text never stored |
+| 🪙 **JWT Tokens** | 1-hour expiry · Separate secrets for students and admins |
+| 🚦 **Rate Limiting** | 10 login attempts / 15 min · 3 vote attempts / min |
+| 🧹 **Input Validation** | `express-validator` sanitizes all inputs before DB touch |
+| 💉 **SQL Injection** | Fully parameterized queries via `pg` — no raw string queries |
+| 🔐 **Duplicate Votes** | DB transaction + `SELECT ... FOR UPDATE` row-level lock |
+| 👁️ **Anonymity** | Admin sees **only aggregated counts** — never who voted for whom |
+
+<br/>
 
 ---
 
-## 📁 Project Structure
+## 🗺️ Application Flow
 
 ```
-college-election/
-├── server/                        # Backend (Node.js + Express)
-│   ├── config/
-│   │   └── db.js                  # PostgreSQL connection pool
-│   ├── controllers/
-│   │   ├── authController.js      # Student login + JWT issuance
-│   │   ├── voteController.js      # Vote submission (transactional)
-│   │   └── adminController.js     # All admin operations
-│   ├── middleware/
-│   │   ├── auth.js                # JWT guards (student + admin)
-│   │   ├── rateLimiter.js         # Brute-force protection
-│   │   └── validate.js            # Input sanitization
-│   ├── routes/
-│   │   ├── auth.js                # POST /api/auth/login
-│   │   ├── vote.js                # GET /api/candidates, POST /api/vote
-│   │   └── admin.js               # /api/admin/*
-│   ├── scripts/
-│   │   └── seedAdmin.js           # Creates initial admin user
-│   ├── schema.sql                 # PostgreSQL database schema
-│   ├── .env.example               # Environment variable template
-│   └── server.js                  # Express entry point
-│
-└── client/                        # Frontend (React + Vite)
-    └── src/
-        ├── components/            # Navbar, Spinner, Modal, Route Guards
-        ├── context/               # Auth state via React Context
-        ├── services/
-        │   └── api.js             # Axios API client (auto token injection)
-        └── pages/
-            ├── LandingPage.jsx
-            ├── LoginPage.jsx
-            ├── VotingPage.jsx
-            ├── SuccessPage.jsx
-            ├── AlreadyVotedPage.jsx
-            └── admin/
-                ├── AdminLoginPage.jsx
-                ├── AdminLayout.jsx
-                ├── AdminDashboard.jsx
-                ├── AdminCandidatesPage.jsx
-                ├── AdminStudentsPage.jsx
-                └── AdminResultsPage.jsx
+Student                                      Admin
+───────                                      ─────
+  │                                            │
+  ├── / (Landing Page)                         ├── /admin (Admin Login)
+  │                                            │
+  ├── /login (Enter Roll No + Password)        ├── /admin/dashboard
+  │      │                                     │      ├── Live stats (students, votes, turnout)
+  │      ▼ JWT issued                          │      └── Start / Stop Election button
+  │                                            │
+  ├── /vote (Browse Candidates)                ├── /admin/candidates
+  │      │    [Election must be active]        │      ├── Add candidate (name, dept, manifesto)
+  │      ▼ Select + Confirm modal              │      └── Remove candidate
+  │                                            │
+  ├── /success (Vote Recorded ✅)              ├── /admin/students
+  │                                            │      ├── Upload via CSV
+  └── /already-voted (Permanent lock 🔒)       │      └── View all students + voted status
+                                               │
+                                               └── /admin/results
+                                                      ├── Vote counts + % bars
+                                                      ├── Winner highlight
+                                                      └── Export as CSV
 ```
+
+<br/>
+
+---
+
+## 🗄️ Database Schema
+
+```sql
+students        → id, name, roll_number (UNIQUE), department, year,
+                  password_hash, has_voted, created_at
+
+candidates      → id, name, photo_url, manifesto, department, year, created_at
+
+votes           → id, student_id (UNIQUE FK), candidate_id (FK), created_at
+                  ↑ UNIQUE on student_id = one vote per student, enforced at DB level
+
+admins          → id, username (UNIQUE), password_hash, created_at
+
+election_config → id, election_active (bool), election_name,
+                  started_at, ended_at, updated_at
+```
+
+<br/>
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
+- [Node.js](https://nodejs.org) v18+
+- [PostgreSQL](https://www.postgresql.org) 14+
 
-- [Node.js](https://nodejs.org/) v18+
-- [PostgreSQL](https://www.postgresql.org/) 14+
-- npm v9+
-
-### 1. Clone the Repository
+### 1 · Clone
 
 ```bash
 git clone https://github.com/anandmahadev/CLUB-ELECTION.git
 cd CLUB-ELECTION
 ```
 
-### 2. Set Up the Database
-
-Open **psql** or **pgAdmin** and run:
+### 2 · Setup Database
 
 ```sql
+-- In psql or pgAdmin
 CREATE DATABASE college_election;
 ```
-
-Import the schema:
 
 ```bash
 psql -U postgres -d college_election -f server/schema.sql
 ```
 
-### 3. Configure Environment Variables
+### 3 · Configure Environment
 
 ```bash
 cd server
-copy .env.example .env
+copy .env.example .env   # Windows
+# cp .env.example .env   # Mac/Linux
 ```
 
-Edit `server/.env`:
+Fill in `server/.env`:
 
 ```env
-PORT=5000
-NODE_ENV=development
-
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=college_election
 DB_USER=postgres
-DB_PASSWORD=your_postgres_password
+DB_PASSWORD=your_password
 
-JWT_SECRET=change_this_to_a_long_random_string
-JWT_ADMIN_SECRET=change_this_to_another_long_random_string
-JWT_EXPIRY=1h
+JWT_SECRET=long_random_string_here
+JWT_ADMIN_SECRET=another_long_random_string
 
 ADMIN_USERNAME=admin
 ADMIN_PASSWORD=Admin@123
@@ -158,145 +198,149 @@ ADMIN_PASSWORD=Admin@123
 CLIENT_ORIGIN=http://localhost:5173
 ```
 
-### 4. Install Dependencies
+### 4 · Install & Seed
 
 ```bash
 # Backend
-cd server
-npm install
+cd server && npm install
+node scripts/seedAdmin.js   # Creates admin account
 
 # Frontend
-cd ../client
-npm install
+cd ../client && npm install
 ```
 
-### 5. Seed Admin User
+### 5 · Run
 
 ```bash
-cd server
-node scripts/seedAdmin.js
+# Terminal 1 — Backend (port 5000)
+cd server && npm run dev
+
+# Terminal 2 — Frontend (port 5173)
+cd client && npm run dev
 ```
 
-This creates the admin account defined in your `.env`.
-
-### 6. Run the Application
-
-Open **two terminals**:
-
-```bash
-# Terminal 1 — Backend (from /server)
-npm run dev
-
-# Terminal 2 — Frontend (from /client)
-npm run dev
-```
-
-| URL | Purpose |
+| URL | |
 |---|---|
-| `http://localhost:5173` | Student voting portal |
-| `http://localhost:5173/admin` | Admin panel |
-| `http://localhost:5000/api/health` | API health check |
+| `http://localhost:5173` | 🎓 Student Portal |
+| `http://localhost:5173/admin` | 👨‍💼 Admin Panel |
+| `http://localhost:5000/api/health` | 💚 API Health Check |
+
+<br/>
 
 ---
 
-## 👥 How It Works
-
-### 👨‍🎓 Student Flow
-
-1. Go to the portal → **Login to Vote**
-2. Enter Roll Number + Password *(provided by admin)*
-3. Browse candidates → click **Vote**
-4. Confirm in the popup → vote is recorded permanently
-5. Cannot vote again — redirected to "Already Voted" page on next login
-
-### 👨‍💼 Admin Flow
-
-1. Login at `/admin`
-2. **Upload Students** via CSV file
-3. **Add Candidates** with name, department, year, manifesto
-4. **Start Election** — students can now vote
-5. Monitor **live results** in real time
-6. **Stop Election** when voting closes
-7. **Export results** as CSV for official records
-
----
-
-## 📋 Sample CSV for Student Upload
+## 📋 Sample CSV — Student Upload
 
 ```csv
 name,roll_number,department,year,password
 Rahul Sharma,CSE2021001,Computer Science,3rd Year,Pass@123
-Priya Verma,ECE2022010,Electronics Engineering,2nd Year,Pass@456
-Arjun Singh,ME2020015,Mechanical Engineering,4th Year,Pass@789
+Priya Verma,ECE2022010,Electronics,2nd Year,Pass@456
+Arjun Singh,ME2020015,Mechanical,4th Year,Pass@789
 ```
 
-> Passwords from the CSV are hashed with bcrypt before storing — the plain text is never saved.
+> Passwords in the CSV are hashed before storage — plain text is **never saved**.
+
+<br/>
 
 ---
 
 ## 🔗 API Reference
 
-| Method | Endpoint | Auth Required | Description |
+<details>
+<summary><strong>Student Endpoints</strong></summary>
+
+| Method | Endpoint | Auth | Description |
 |:---:|---|:---:|---|
-| `POST` | `/api/auth/login` | ❌ | Student login |
-| `GET` | `/api/candidates` | ✅ Student JWT | Candidates + election status |
-| `POST` | `/api/vote` | ✅ Student JWT | Submit vote |
+| `POST` | `/api/auth/login` | ❌ | Login with roll number + password |
+| `GET` | `/api/candidates` | ✅ JWT | Get candidates and election status |
+| `POST` | `/api/vote` | ✅ JWT | Submit vote |
+
+</details>
+
+<details>
+<summary><strong>Admin Endpoints</strong></summary>
+
+| Method | Endpoint | Auth | Description |
+|:---:|---|:---:|---|
 | `POST` | `/api/admin/login` | ❌ | Admin login |
-| `GET` | `/api/admin/dashboard` | ✅ Admin JWT | Stats overview |
-| `POST` | `/api/admin/add-candidate` | ✅ Admin JWT | Add candidate |
-| `GET` | `/api/admin/candidates` | ✅ Admin JWT | List candidates |
-| `DELETE` | `/api/admin/candidates/:id` | ✅ Admin JWT | Remove candidate |
-| `POST` | `/api/admin/upload-students` | ✅ Admin JWT | Bulk CSV upload |
-| `GET` | `/api/admin/students` | ✅ Admin JWT | List all students |
-| `POST` | `/api/admin/start-election` | ✅ Admin JWT | Activate election |
-| `POST` | `/api/admin/stop-election` | ✅ Admin JWT | Deactivate election |
-| `GET` | `/api/admin/results` | ✅ Admin JWT | Aggregated results |
-| `GET` | `/api/admin/export-results` | ✅ Admin JWT | Download results CSV |
+| `GET` | `/api/admin/dashboard` | ✅ Admin | Stats overview |
+| `POST` | `/api/admin/add-candidate` | ✅ Admin | Add candidate |
+| `GET` | `/api/admin/candidates` | ✅ Admin | List candidates |
+| `DELETE` | `/api/admin/candidates/:id` | ✅ Admin | Remove candidate |
+| `POST` | `/api/admin/upload-students` | ✅ Admin | Bulk CSV upload |
+| `GET` | `/api/admin/students` | ✅ Admin | All students + vote status |
+| `POST` | `/api/admin/start-election` | ✅ Admin | Activate election |
+| `POST` | `/api/admin/stop-election` | ✅ Admin | Deactivate election |
+| `GET` | `/api/admin/results` | ✅ Admin | Aggregated results |
+| `GET` | `/api/admin/export-results` | ✅ Admin | Download results as CSV |
+
+</details>
+
+<br/>
 
 ---
 
-## 🔒 Security
+## 🚢 Deployment
 
-| Feature | Implementation |
-|---|---|
-| Password hashing | bcrypt with 10 salt rounds |
-| JWT expiry | 1 hour (separate secrets for student/admin) |
-| Login rate limiting | Max 10 attempts per 15 minutes |
-| Vote rate limiting | Max 3 attempts per minute |
-| Input sanitization | express-validator on all endpoints |
-| SQL injection | Parameterized queries via `pg` library |
-| Duplicate vote prevention | DB transaction + row-level FOR UPDATE lock |
-| Vote anonymity | Admin UI shows only aggregated counts — no student→candidate mapping exposed |
+> The frontend and backend must be **hosted separately**.
 
----
+| Part | Recommended Platform | Free |
+|---|---|:---:|
+| 🎨 **Frontend** (React/Vite) | [Vercel](https://vercel.com) | ✅ |
+| ⚙️ **Backend** (Node/Express) | [Render](https://render.com) | ✅ |
+| 🗄️ **Database** (PostgreSQL) | [Railway](https://railway.app) or [Supabase](https://supabase.com) | ✅ |
 
-## 🚢 Production Deployment
+### Vercel (Frontend)
+1. Import repo on Vercel
+2. Set **Root Directory** → `client`
+3. Framework: **Vite** · Build: `npm run build` · Output: `dist`
+4. Add env var: `VITE_API_URL=https://your-render-backend.onrender.com/api`
 
-1. Set `NODE_ENV=production` in your `.env`
-2. Use strong random values for all JWT secrets
-3. Set `CLIENT_ORIGIN` to your deployed frontend URL
-4. Build the frontend:
-   ```bash
-   cd client && npm run build
-   ```
-5. Serve `client/dist` via **Nginx** or a static host (Vercel, Netlify)
-6. Run the backend with **PM2**:
-   ```bash
-   npm install -g pm2
-   pm2 start server/server.js --name college-election-api
-   ```
-7. Never commit `.env` — use your hosting platform's environment variables
+### Render (Backend)
+1. New Web Service → connect repo
+2. Root directory: `server`
+3. Build: `npm install` · Start: `node server.js`
+4. Add all variables from `server/.env.example`
+
+<br/>
 
 ---
 
-## 📄 License
+## 📁 Project Structure
 
-This project is licensed under the **MIT License**.
+```
+CLUB-ELECTION/
+├── server/                    # Node.js + Express Backend
+│   ├── config/db.js           # PostgreSQL pool
+│   ├── controllers/           # Business logic
+│   ├── middleware/            # Auth · Rate limit · Validation
+│   ├── routes/                # API route definitions
+│   ├── scripts/seedAdmin.js   # One-time admin setup
+│   ├── schema.sql             # Database schema
+│   └── server.js              # Entry point
+│
+└── client/                    # React + Vite Frontend
+    └── src/
+        ├── context/           # Auth state (React Context)
+        ├── services/api.js    # Axios client (auto-injects JWT)
+        ├── components/        # Navbar, Modal, Spinner, Guards
+        └── pages/
+            ├── LandingPage.jsx
+            ├── LoginPage.jsx
+            ├── VotingPage.jsx
+            ├── SuccessPage.jsx
+            ├── AlreadyVotedPage.jsx
+            └── admin/         # Full admin panel (5 pages)
+```
+
+<br/>
 
 ---
 
 <div align="center">
 
-Built with ❤️ for fair, secure, and anonymous college elections.
+**Made for fair, secure, and anonymous college elections.**
+
+If this helped you, consider giving it a ⭐
 
 </div>
