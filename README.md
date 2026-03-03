@@ -335,6 +335,16 @@ CLUB-ELECTION/
 
 <br/>
 
+## 🤝 Community & Support
+
+- **Bug Reports:** Open an issue [here](https://github.com/anandmahadev/CLUB-ELECTION/issues)
+- **Feature Requests:** Share your ideas in the issues or start a discussion.
+- **Questions:** Feel free to reach out to the maintainers.
+
+## 👨‍💻 Maintainers
+
+- **Anand Mahadev** - [GitHub](https://github.com/anandmahadev)
+
 ---
 
 <div align="center">
